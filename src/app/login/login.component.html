@@ -1,0 +1,26 @@
+<h1>Login</h1>
+
+<button (click)="signInWithGoogle()" class="btn btn-success" *ngIf="!auth.currentUser">
+  <i clas="fa fa-google-plus fa-lg"></i> Google
+</button>
+
+<div *ngIf="auth.currentUser && !auth.hasUsername">
+
+  <h3>Choose a Username</h3>
+
+  <input type="text" class="form-input" placeholder="choose a username" [(ngModel)]="usernameText" (keyup)="checkUsername()"
+  />
+
+  <p class="help is-success" *ngIf="usernameAvailabe && usernameText">
+    @{{usernameText}} is available
+  </p>
+
+  <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
+    @{{usernameText}} has already been taken
+  </p>
+
+  <button class="btn btn-success" [disabled]="!usernameAvailable || !usernameText" (click)="updateUsername()">
+    Select Username
+  </button>
+
+</div>
