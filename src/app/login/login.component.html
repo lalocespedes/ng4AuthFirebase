@@ -24,3 +24,28 @@
   </button>
 
 </div>
+
+<div class="row">
+  <div class="col col-md"></div>    
+  <div class="col-md-10 col-md-6">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h4>Introduzca los siguientes datos:</h4>
+      <label>Correo Electrónico</label>
+      <input type="email" id="inputEmail" class="form-control" 
+           formControlName="email" required autofocus>
+      <label>Contraseña</label>
+      <input type="password" id="inputPassword" class="form-control" 
+           formControlName="password" required>
+      <hr>
+      <button type="submit" 
+              class="btn btn-primary"
+              [disabled]="!loginForm.valid"
+              >Inicie sesión</button> 
+    </form>
+    <p class="alert alert-danger" *ngIf="mensaje">
+        El usuario o contraseña no es correcto
+    </p>
+  </div>
+  <div class="col col-md"></div>    
+</div>
+

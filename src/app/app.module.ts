@@ -1,15 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
+import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 
-import { FormsModule } from "@angular/forms";
-import { HttpModule } from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAne-QUmpNmE6xRNdVbbMlqC-nAGJmH5UI",
@@ -45,6 +46,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(routes)
@@ -54,6 +56,7 @@ const routes: Routes = [
     AngularFireDatabase,
     AuthService,
     AuthGuard
+    
   ],
   bootstrap: [AppComponent]
 })

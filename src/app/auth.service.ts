@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase";
+import { Router, ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -20,7 +21,7 @@ export class AuthService {
 
   currentUser: User;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router, private activatedRouter: ActivatedRoute) {
 
     this.afAuth.authState.switchMap(auth => {
       if (auth) {
@@ -64,6 +65,31 @@ export class AuthService {
 
   authenticated() {
     return true;
+  }
+
+  inicioSesion(userdata) {
+    firebase.auth().signInWithEmailAndPassword(userdata.email, userdata.password)
+      .then(response => {
+        console.log(response);
+        this.router.navigate(['/inicio']);
+      })
+      .catch(
+      error => {
+        console.log(error);
+      })
+  }
+
+  isAuthenticated() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  logout() {
+    firebase.auth().signOut();
   }
 
 }
